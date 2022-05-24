@@ -54,9 +54,7 @@ public class AffinePoint {
 
     @Override
     public String toString() {
-        return "AffinePoint{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
+        return  " x = " + x +
+                " y = " + y ;
     }
 }

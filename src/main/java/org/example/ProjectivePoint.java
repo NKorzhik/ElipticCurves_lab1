@@ -114,10 +114,8 @@ public class ProjectivePoint {
 
     @Override
     public String toString() {
-        return "ProjectivePoint{" +
-                "x=" + x +
-                ", y=" + y +
-                ", z=" + z +
-                '}';
+        return  " x = " + x +
+                " y = " + y +
+                " z = " + z;
     }
 }
