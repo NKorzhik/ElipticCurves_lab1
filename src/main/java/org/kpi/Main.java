@@ -9,11 +9,6 @@ public class Main {
 
         // P - 192
 
-//        BigInteger p = new BigInteger("fffffffffffffffffffffffffffffffeffffffffffffffff",16);
-//        BigInteger a = new BigInteger("fffffffffffffffffffffffffffffffefffffffffffffffc", 16);
-//        BigInteger b = new BigInteger("64210519e59c80e70fa7e9ab72243049feb8deecc146b9b1", 16);
-//        BigInteger n = new BigInteger("ffffffffffffffffffffffff99def836146bc9b1b4d22831",16);
-
         BigInteger a = BigInteger.valueOf(-3);
         BigInteger b = new BigInteger("64210519e59c80e70fa7e9ab72243049feb8deecc146b9b1",16);
         BigInteger p = new BigInteger("6277101735386680763835789423207666416083908700390324961279");

@@ -36,7 +36,6 @@ public class Operations {
         return left.equals(right);
     }
 
-
     public BigInteger getRandomBigInteger(BigInteger p) {
         BigInteger minLimit = BigInteger.valueOf(1);
         BigInteger bigInteger = p.subtract(minLimit);
@@ -58,7 +57,6 @@ public class Operations {
         return a.modPow(k.add(BigInteger.valueOf(1)), p);
     }
 
-
     public ProjectivePoint affineToProjective(AffinePoint point) {
         return new ProjectivePoint(point.getX(), point.getY());
     }
@@ -69,7 +67,6 @@ public class Operations {
         }
         return new AffinePoint(point.getX().multiply(point.getZ().modInverse(p)).mod(p), point.getY().multiply(point.getZ().modInverse(p)).mod(p));
     }
-
 
     public ProjectivePoint pointDouble(ProjectivePoint point, BigInteger a, BigInteger p) {
 
