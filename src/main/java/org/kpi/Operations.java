@@ -21,8 +21,8 @@ public class Operations {
         AffinePoint result = new AffinePoint(BigInteger.valueOf(-1), BigInteger.valueOf(-1));
 
         while (!existPoint(result, a, b, p)) {
-            BigInteger xPoint = getRandomBigInteger();
-            BigInteger yPoint = sqrtMod((((xPoint.pow(3)).add(a.multiply(xPoint))).add(b)).mod(p), p);
+            BigInteger xPoint = getRandomBigInteger(p);
+            BigInteger yPoint = sqrtMod(xPoint.pow(3).add(a.multiply(xPoint)).add(b).mod(p), p);
             result = new AffinePoint(xPoint, yPoint);
         }
 
@@ -37,13 +37,24 @@ public class Operations {
     }
 
 
-    public BigInteger getRandomBigInteger() {
-        Random rand = new Random();
-        return new BigInteger(192, rand);
+    public BigInteger getRandomBigInteger(BigInteger p) {
+        BigInteger minLimit = BigInteger.valueOf(1);
+        BigInteger bigInteger = p.subtract(minLimit);
+        Random randNum = new Random();
+        int len = p.bitLength();
+        BigInteger res = new BigInteger(len, randNum);
+        if (res.compareTo(minLimit) < 0)
+            res = res.add(minLimit);
+        if (res.compareTo(bigInteger) >= 0)
+            res = res.mod(bigInteger).add(minLimit);
+        return res;
+
     }
 
     public BigInteger sqrtMod(BigInteger a, BigInteger p) {
-        BigInteger k = (p.subtract(BigInteger.valueOf(3))).shiftRight(2);
+        //4k+3
+        //k = (p - 3)/4
+        BigInteger k = p.subtract(BigInteger.valueOf(3)).divide(BigInteger.valueOf(4));
         return a.modPow(k.add(BigInteger.valueOf(1)), p);
     }
 
@@ -76,7 +87,7 @@ public class Operations {
         BigInteger H = W.pow(2).subtract(BigInteger.valueOf(8).multiply(B)).mod(p);
 
         return new ProjectivePoint(
-               H.multiply(S).shiftLeft(1).mod(p),
+                H.multiply(S).shiftLeft(1).mod(p),
                 //BigInteger.valueOf(2).multiply(H).multiply(S).mod(p),
                 W.multiply(BigInteger.valueOf(4).multiply(B).subtract(H)).subtract(BigInteger.valueOf(8).multiply(point.getY().pow(2)).multiply(S.pow(2))).mod(p),
                 BigInteger.valueOf(8).multiply(S.pow(3)).mod(p));
@@ -123,19 +134,31 @@ public class Operations {
         ProjectivePoint R0 = ProjectivePoint.POINT_AT_INFINITY;
         ProjectivePoint R1 = point;
 
-        String s = n.toString(2);
-
-        for (int i = 0; i < s.length() - 1; i++) {
-            if (s.charAt(i) == 0) {
+        while (!n.equals(BigInteger.ZERO)) {
+            if (n.and(BigInteger.valueOf(0)).equals(BigInteger.ZERO)) {
                 R1 = pointAdd(R0, R1, a, p);
                 R0 = pointDouble(R0, a, p);
             } else {
                 R0 = pointAdd(R0, R1, a, p);
                 R1 = pointDouble(R1, a, p);
             }
-
+            n = n.shiftRight(1);
         }
-        return new ProjectivePoint(R0.getX().mod(p), R0.getY().mod(p), R0.getZ().mod(p));
+        return R0;
+    }
+
+    public ProjectivePoint scalarMultiplication(ProjectivePoint point, BigInteger n, BigInteger a, BigInteger p) {
+        ProjectivePoint result = ProjectivePoint.POINT_AT_INFINITY;
+        ProjectivePoint temp = point;
+
+        while (!n.equals(BigInteger.ZERO)) {
+            if (!n.and(BigInteger.valueOf(1)).equals(BigInteger.ZERO)) {
+                result = pointAdd(result, temp, a, p);
+            }
+            temp = pointDouble(temp, a, p);
+            n = n.shiftRight(1);
+        }
+        return result;
     }
 
 
