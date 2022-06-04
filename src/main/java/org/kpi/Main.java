@@ -20,7 +20,6 @@ public class Main {
 
         AffinePoint point1 = operations.createAffinePoint(a,b,p);
         AffinePoint point2 = operations.createAffinePoint(a,b,p);
-
 //
 //        // test for sqrtMod correct
 //        System.out.println(operations.sqrtMod(BigInteger.valueOf(4), BigInteger.valueOf(15)));
