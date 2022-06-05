@@ -1,15 +1,13 @@
 package org.kpi;
 
 import java.math.BigInteger;
-import java.util.Random;
+import java.util.Objects;
 
 public class AffinePoint {
 
     private BigInteger x;
     private BigInteger y;
 
-    public AffinePoint() {
-    }
 
     public AffinePoint(BigInteger x, BigInteger y) {
         this.x = x;
@@ -24,17 +22,17 @@ public class AffinePoint {
         return y;
     }
 
-    public void setX(BigInteger x) {
-        this.x = x;
-    }
-
-    public void setY(BigInteger y) {
-        this.y = y;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AffinePoint point = (AffinePoint) o;
+        return x.equals(point.x) && y.equals(point.y);
     }
 
     @Override
-    public String toString() {
-        return  " x = " + x +
-                " y = " + y ;
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
+
 }

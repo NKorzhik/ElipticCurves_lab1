@@ -62,7 +62,7 @@ public class Operations {
     }
 
     public AffinePoint projectToAffine(ProjectivePoint point, BigInteger p) {
-        if (point.equals(ProjectivePoint.POINT_AT_INFINITY)) {
+        if (point.equals(Parameters.POINT_AT_INFINITY)) {
             return new AffinePoint(null, null);
         }
         return new AffinePoint(point.getX().multiply(point.getZ().modInverse(p)).mod(p), point.getY().multiply(point.getZ().modInverse(p)).mod(p));
@@ -70,12 +70,12 @@ public class Operations {
 
     public ProjectivePoint pointDouble(ProjectivePoint point, BigInteger a, BigInteger p) {
 
-        if (point.equals(ProjectivePoint.POINT_AT_INFINITY)) {
-            return ProjectivePoint.POINT_AT_INFINITY;
+        if (point.equals(Parameters.POINT_AT_INFINITY)) {
+            return Parameters.POINT_AT_INFINITY;
         }
 
         if (point.getY().equals(BigInteger.ZERO)) {
-            return ProjectivePoint.POINT_AT_INFINITY;
+            return Parameters.POINT_AT_INFINITY;
         }
 
         BigInteger W = a.multiply(point.getZ().pow(2)).add(BigInteger.valueOf(3).multiply(point.getX().pow(2))).mod(p);
@@ -94,11 +94,11 @@ public class Operations {
 
     public ProjectivePoint pointAdd(ProjectivePoint pointA, ProjectivePoint pointB, BigInteger a, BigInteger p) {
 
-        if (pointA.equals(ProjectivePoint.POINT_AT_INFINITY)) {
+        if (pointA.equals(Parameters.POINT_AT_INFINITY)) {
             return pointB;
         }
 
-        if (pointB.equals(ProjectivePoint.POINT_AT_INFINITY)) {
+        if (pointB.equals(Parameters.POINT_AT_INFINITY)) {
             return pointA;
         }
 
@@ -110,7 +110,7 @@ public class Operations {
 
         if (V1.equals(V2)) {
             if (!U1.equals(U2)) {
-                return ProjectivePoint.POINT_AT_INFINITY;
+                return Parameters.POINT_AT_INFINITY;
             } else return pointDouble(pointA, a, p);
         }
 
@@ -128,7 +128,7 @@ public class Operations {
 
     public ProjectivePoint scalarMultiplicationM(ProjectivePoint point, BigInteger n, BigInteger a, BigInteger p) {
 
-        ProjectivePoint R0 = ProjectivePoint.POINT_AT_INFINITY;
+        ProjectivePoint R0 = Parameters.POINT_AT_INFINITY;
         ProjectivePoint R1 = point;
 
         while (!n.equals(BigInteger.ZERO)) {
@@ -145,7 +145,7 @@ public class Operations {
     }
 
     public ProjectivePoint scalarMultiplication(ProjectivePoint point, BigInteger n, BigInteger a, BigInteger p) {
-        ProjectivePoint result = ProjectivePoint.POINT_AT_INFINITY;
+        ProjectivePoint result = Parameters.POINT_AT_INFINITY;
         ProjectivePoint temp = point;
 
         while (!n.equals(BigInteger.ZERO)) {

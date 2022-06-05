@@ -1,15 +1,13 @@
 package org.kpi;
 
-
 import java.math.BigInteger;
-
+import java.util.Objects;
 
 public class ProjectivePoint {
 
     private BigInteger x;
     private BigInteger y;
     private BigInteger z;
-    final static ProjectivePoint POINT_AT_INFINITY = new ProjectivePoint(BigInteger.ZERO, BigInteger.ONE, BigInteger.ZERO);
 
     public ProjectivePoint(BigInteger x, BigInteger y) {
         this.x = x;
@@ -27,30 +25,26 @@ public class ProjectivePoint {
         return x;
     }
 
-    public void setX(BigInteger x) {
-        this.x = x;
-    }
 
     public BigInteger getY() {
         return y;
-    }
-
-    public void setY(BigInteger y) {
-        this.y = y;
     }
 
     public BigInteger getZ() {
         return z;
     }
 
-    public void setZ(BigInteger z) {
-        this.z = z;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProjectivePoint point = (ProjectivePoint) o;
+        return x.equals(point.x) && y.equals(point.y) && z.equals(point.z);
     }
 
     @Override
-    public String toString() {
-        return  " x = " + x +
-                " y = " + y +
-                " z = " + z;
+    public int hashCode() {
+        return Objects.hash(x, y, z);
     }
+
 }
