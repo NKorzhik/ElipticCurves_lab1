@@ -30,8 +30,8 @@ public class Operations {
     }
 
     public Boolean existPoint(AffinePoint point, BigInteger a, BigInteger b, BigInteger p) {
-        BigInteger left = point.getY().modPow(BigInteger.valueOf(2), p);
-        BigInteger right = point.getX().pow(3).add(a.multiply(point.getX())).add(b).mod(p);
+        BigInteger left = point.y().modPow(BigInteger.valueOf(2), p);
+        BigInteger right = point.x().pow(3).add(a.multiply(point.x())).add(b).mod(p);
 
         return left.equals(right);
     }
@@ -58,7 +58,7 @@ public class Operations {
     }
 
     public ProjectivePoint affineToProjective(AffinePoint point) {
-        return new ProjectivePoint(point.getX(), point.getY());
+        return new ProjectivePoint(point.x(), point.y());
     }
 
     public AffinePoint projectToAffine(ProjectivePoint point, BigInteger p) {
