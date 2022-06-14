@@ -5,9 +5,9 @@ import java.util.Objects;
 
 public class ProjectivePoint {
 
-    private BigInteger x;
-    private BigInteger y;
-    private BigInteger z;
+    private final BigInteger x;
+    private final BigInteger y;
+    private final BigInteger z;
 
     public ProjectivePoint(BigInteger x, BigInteger y) {
         this.x = x;
@@ -47,4 +47,12 @@ public class ProjectivePoint {
         return Objects.hash(x, y, z);
     }
 
+    @Override
+    public String toString() {
+        return "ProjectivePoint{" +
+                "x=" + x +
+                ", y=" + y +
+                ", z=" + z +
+                '}';
+    }
 }

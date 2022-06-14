@@ -1,26 +1,8 @@
 package org.kpi;
 
 import java.math.BigInteger;
-import java.util.Objects;
 
-public class AffinePoint {
-
-    private BigInteger x;
-    private BigInteger y;
-
-
-    public AffinePoint(BigInteger x, BigInteger y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public BigInteger getX() {
-        return x;
-    }
-
-    public BigInteger getY() {
-        return y;
-    }
+public record AffinePoint(BigInteger x, BigInteger y) {
 
     @Override
     public boolean equals(Object o) {
@@ -31,8 +13,10 @@ public class AffinePoint {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(x, y);
+    public String toString() {
+        return "AffinePoint{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
     }
-
 }

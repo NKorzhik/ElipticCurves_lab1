@@ -10,4 +10,8 @@ I implemented arithmetic on elliptic curves:
  5. functions of transformation of a point between affine and projective coordinates.
  6. Tests to check the correctness of operations
 
+Also implemented:
 
+1. Diffie-Gellman key exchange for elliptic curves
+2. Directional encryption based on elliptical curves
+3. Digital signature based on elliptical curves
