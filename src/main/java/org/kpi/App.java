@@ -19,11 +19,13 @@ public class App {
 
         //------------------------------------------Encrypted--------------------------------------------//
 
+
         //Parameters
         SecretKey key = AESUtil.generateKey(128);
         IvParameterSpec ivParameterSpec = AESUtil.generateIv();
         AffinePoint point = operations.createAffinePoint(par.a, par.b, par.p);
         ProjectivePoint point1 = operations.affineToProjective(point);
+
 
         //Generation key for Bob
         BigInteger secretKeyBobDB = operations.getRandomBigInteger(par.n);
